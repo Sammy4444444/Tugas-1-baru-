@@ -1,7 +1,8 @@
 # write a code for the third screen of app
 # write a code for the third screen of app
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer, QTime, QLocale
+from PyQt5.QtGui import QDoubleValidator, QIntValidator, QFont
 from PyQt5.QtWidgets import (
     QApplication, QWidget,
     QHBoxLayout, QVBoxLayout, QGridLayout,
@@ -20,12 +21,13 @@ txt_workheart = 'Cardiac performance: '
 
 # ----class-----
 class FinalWin(QWidget):
-    def __init__(self):
-        
+    def __init__(self, exp):
         super().__init__()
+        self.exp = exp
         self.initUI()
         self.set_appear()
         self.show()
+        
 
     def initUI(self):
         
@@ -108,6 +110,27 @@ class FinalWin(QWidget):
                 return txt_res4
             else:
                 return txt_res5
+
+
+
+    def initUI(self):
+        ''' creates graphic elements '''
+        self.work_text = QLabel(txt_workheart + self.results())
+        self.index_text = QLabel(txt_index + str(self.index))
+
+
+        self.layout_line = QVBoxLayout()
+        self.layout_line.addWidget(self.index_text, alignment = Qt.AlignCenter)
+        self.layout_line.addWidget(self.work_text, alignment = Qt.AlignCenter)        
+        self.setLayout(self.layout_line)
+
+
+    ''' sets what the window will look like (label, size, location) '''
+    def set_appear(self):
+        self.setWindowTitle(txt_finalwin)
+        self.resize(win_width, win_height)
+        self.move(win_x, win_y)
+
             
             
             
